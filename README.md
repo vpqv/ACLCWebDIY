@@ -22,6 +22,32 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
+## Deploy to Heroku
+* under your project, run `npm i --S express path ng2-ace-editor`
+* move everthing in `devDependencies` to `dependencies`
+* under `scripts`, change the start command to `"start": "node server.js"`
+* under `scripts`, add `"postinstall": "ng build --prod"`
+* create `server.js` under the root of your project and copy the following into the file:
+
+        const path = require('path');
+        const express = require('express');
+        const app = express();
+
+        // Serve static files
+        app.use(express.static(__dirname + '/dist/<YOUR_PROJECT_NAME>'));
+
+        // Send all requests to index.html
+        app.get('/*', function(req, res) {
+        res.sendFile(path.join(__dirname + '/dist/<YOUR_PROJECT_NAME>/index.html'));
+        });
+
+        // default Heroku port
+        app.listen(process.env.PORT || 8080);
+
+* change `<YOUR_PROJECT_NAME>` to the actual name of your project.
+* under the root of your project, create `Profile` file and add `web: node server.js` in it.
+* push all your changes back to the remote repository.
+
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
