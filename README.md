@@ -24,9 +24,10 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 ## Deploy to Heroku
 * under your project, run `npm i --S express path ng2-ace-editor`
-* move everthing in `devDependencies` to `dependencies`
-* under `scripts`, change the start command to `"start": "node server.js"`
-* under `scripts`, add `"postinstall": "ng build --prod"`
+* in `package.json`, perform the following:
+    * move everthing in `devDependencies` to `dependencies`
+    * under `scripts`, change the start command to `"start": "node server.js"`
+    * under `scripts`, add `"postinstall": "ng build --prod"`
 * create `server.js` under the root of your project and copy the following into the file:
 
         const path = require('path');
